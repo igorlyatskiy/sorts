@@ -5,3 +5,4 @@
 3. Develop (method + new test)
 4. Push
 5. PR
+6. Give a star to a repository
