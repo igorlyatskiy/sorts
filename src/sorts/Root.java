@@ -4,14 +4,14 @@ package sorts;
 import java.util.Random;
 
 public class Root {
-    public final int[] randomArray = new int[100000];
-    public int[] array = new int[100000];
+    public final int[] randomArray = new int[10000];
+    public int[] array = new int[10000];
 
     Root() {
         var random = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = random.nextInt(100000) + 1;
+            randomArray[i] = random.nextInt(10000) + 1;
         }
     }
 
