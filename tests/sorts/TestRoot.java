@@ -11,7 +11,7 @@ public class TestRoot {
     private int[] sortedData;
 
     TestRoot() {
-        sortedData = Arrays.copyOf(sorts.randomArray, sorts.randomArray.length) ;
+        sortedData = Arrays.copyOf(sorts.randomArray, sorts.randomArray.length);
         Arrays.sort(sortedData);
     }
 
@@ -30,7 +30,8 @@ public class TestRoot {
         Assert.assertEquals(sorts.insertionSort(), sortedData);
     }
 
-    @Test void isMergeSortCorrect() {
+    @Test
+    void isMergeSortCorrect() {
         Assert.assertEquals(sorts.mergeSort(sorts.array, 0, sorts.array.length - 1), sortedData);
     }
 }
