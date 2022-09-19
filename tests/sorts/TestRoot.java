@@ -34,4 +34,9 @@ public class TestRoot {
     public void isMergeSortCorrect() {
         Assert.assertEquals(sorts.mergeSort(sorts.array, 0, sorts.array.length - 1), sortedData);
     }
+
+    @Test
+    public void isQuickSortCorrect() {
+        Assert.assertEquals(sorts.quickSort(sorts.array), sortedData);
+    }
 }

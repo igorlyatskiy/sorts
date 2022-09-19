@@ -4,14 +4,14 @@ package sorts;
 import java.util.Random;
 
 public class Root {
-    public final int[] randomArray = new int[9000];
-    public int[] array = new int[9000];
+    public final int[] randomArray = new int[10000];
+    public int[] array = new int[10000];
 
     Root() {
         var random = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = random.nextInt(9000) + 1;
+            randomArray[i] = random.nextInt(10000) + 1;
         }
     }
 
@@ -105,5 +105,64 @@ public class Root {
 
         return sorted;
 
+    }
+
+    public int[] quickSort(int[] array) {
+        if (array.length < 2) return array;
+
+        int[] left = new int[0];
+        int[] right = new int[0];
+
+        int pivot = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] >= pivot) {
+                right = expandArray(right);
+                right[right.length - 1] = array[i];
+            }
+            if (array[i] < pivot) {
+                left = expandArray(left);
+                left[left.length - 1] = array[i];
+            }
+        }
+
+        int[] pivotArray = new int[1];
+        pivotArray[0] = pivot;
+
+        int[] sortedLeft = quickSort(left);
+        int[] sortedRight = quickSort(right);
+
+        return uniteArrays(uniteArrays(sortedLeft, pivotArray), sortedRight);
+    }
+
+    public int[] expandArray(int[] array) {
+        int[] newArray = new int[array.length + 1];
+        for (int i = 0; i < array.length; i++) {
+            newArray[i] = array[i];
+        }
+
+        return newArray;
+    }
+
+    public int[] uniteArrays(int[] one, int[] two) {
+        int[] resultArray = new int[one.length + two.length];
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < one.length) {
+            resultArray[k] = one[i];
+
+            i++;
+            k++;
+        }
+        while (j < two.length) {
+            resultArray[k] = two[j];
+
+            j++;
+            k++;
+        }
+
+        return resultArray;
     }
 }
