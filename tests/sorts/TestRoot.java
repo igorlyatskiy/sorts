@@ -39,4 +39,7 @@ public class TestRoot {
     public void isQuickSortCorrect() {
         Assert.assertEquals(sorts.quickSort(sorts.array), sortedData);
     }
+
+    @Test
+    public void isOddEvenSortCorrect() { Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);}
 }

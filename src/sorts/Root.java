@@ -4,14 +4,14 @@ package sorts;
 import java.util.Random;
 
 public class Root {
-    public final int[] randomArray = new int[100000];
-    public int[] array = new int[100000];
+    public final int[] randomArray = new int[10000];
+    public int[] array = new int[10000];
 
     Root() {
         var random = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = random.nextInt(100000) + 1;
+            randomArray[i] = random.nextInt(10000) + 1;
         }
     }
 
@@ -164,5 +164,40 @@ public class Root {
         }
 
         return resultArray;
+    }
+
+    public int[] oddEvenSort(int[] arr, int n)
+    {
+        boolean isSorted = false;
+
+        while (!isSorted)
+        {
+            isSorted = true;
+            int temp =0;
+
+            for (int i=1; i<=n-2; i=i+2)
+            {
+                if (arr[i] > arr[i+1])
+                {
+                    temp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = temp;
+                    isSorted = false;
+                }
+            }
+
+            for (int i=0; i<=n-2; i=i+2)
+            {
+                if (arr[i] > arr[i+1])
+                {
+                    temp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = temp;
+                    isSorted = false;
+                }
+            }
+        }
+
+        return arr;
     }
 }
