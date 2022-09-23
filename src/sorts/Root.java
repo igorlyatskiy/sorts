@@ -107,63 +107,56 @@ public class Root {
 
     }
 
-    public int[] quickSort(int[] array) {
-        if (array.length < 2) return array;
+    public int[] quickSort(int[] array, int startIndex, int endIndex) {
+        if (startIndex >= endIndex) {
+            return array;
+        }
 
-        int[] left = new int[0];
-        int[] right = new int[0];
+        int pivotIndex = startIndex;
+        boolean areSmaller = true;
+        boolean areGreater = true;
 
-        int pivot = array[0];
+        while (areSmaller || areGreater) {
 
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] >= pivot) {
-                right = expandArray(right);
-                right[right.length - 1] = array[i];
+            if (areSmaller) {
+                areSmaller = false;
+                for (int i = endIndex; i > pivotIndex; i--) {
+                    if (array[i] < array[pivotIndex]) {
+                        areSmaller = true;
+
+                        int temp = array[i];
+                        array[i] = array[pivotIndex];
+                        array[pivotIndex] = temp;
+
+                        pivotIndex = i;
+
+                        break;
+                    }
+                }
             }
-            if (array[i] < pivot) {
-                left = expandArray(left);
-                left[left.length - 1] = array[i];
+
+            if (areGreater) {
+                areGreater = false;
+                for (int i = startIndex; i < pivotIndex; i++) {
+                    if (array[i] > array[pivotIndex]) {
+                        areGreater = true;
+
+                        int temp = array[i];
+                        array[i] = array[pivotIndex];
+                        array[pivotIndex] = temp;
+
+                        pivotIndex = i;
+
+                        break;
+                    }
+                }
             }
         }
 
-        int[] pivotArray = new int[1];
-        pivotArray[0] = pivot;
+        quickSort(array, startIndex, pivotIndex - 1);
+        quickSort(array, pivotIndex + 1, endIndex);
 
-        int[] sortedLeft = quickSort(left);
-        int[] sortedRight = quickSort(right);
-
-        return uniteArrays(uniteArrays(sortedLeft, pivotArray), sortedRight);
-    }
-
-    public int[] expandArray(int[] array) {
-        int[] newArray = new int[array.length + 1];
-        for (int i = 0; i < array.length; i++) {
-            newArray[i] = array[i];
-        }
-
-        return newArray;
-    }
-
-    public int[] uniteArrays(int[] one, int[] two) {
-        int[] resultArray = new int[one.length + two.length];
-
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        while (i < one.length) {
-            resultArray[k] = one[i];
-
-            i++;
-            k++;
-        }
-        while (j < two.length) {
-            resultArray[k] = two[j];
-
-            j++;
-            k++;
-        }
-
-        return resultArray;
+        return array;
     }
 
     public int[] oddEvenSort(int[] arr, int n)

@@ -37,7 +37,7 @@ public class TestRoot {
 
     @Test
     public void isQuickSortCorrect() {
-        Assert.assertEquals(sorts.quickSort(sorts.array), sortedData);
+        Assert.assertEquals(sorts.quickSort(sorts.array, 0, sorts.array.length - 1), sortedData);
     }
 
     @Test
