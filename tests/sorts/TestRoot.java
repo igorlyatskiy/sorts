@@ -42,4 +42,9 @@ public class TestRoot {
 
     @Test
     public void isOddEvenSortCorrect() { Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);}
+
+    @Test
+    public void isTimSort(){
+        Assert.assertEquals(sorts.timSort(sorts.array, sorts.array.length), sortedData);
+    }
 }
