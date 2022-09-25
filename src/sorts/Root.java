@@ -108,55 +108,32 @@ public class Root {
     }
 
     public int[] quickSort(int[] array, int startIndex, int endIndex) {
-        if (startIndex >= endIndex) {
-            return array;
+        if(startIndex < endIndex) {
+            int pivotIndex = getPivotIndex(array, startIndex, endIndex);
+            quickSort(array, startIndex, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, endIndex);
         }
-
-        int pivotIndex = startIndex;
-        boolean areSmaller = true;
-        boolean areGreater = true;
-
-        while (areSmaller || areGreater) {
-
-            if (areSmaller) {
-                areSmaller = false;
-                for (int i = endIndex; i > pivotIndex; i--) {
-                    if (array[i] < array[pivotIndex]) {
-                        areSmaller = true;
-
-                        int temp = array[i];
-                        array[i] = array[pivotIndex];
-                        array[pivotIndex] = temp;
-
-                        pivotIndex = i;
-
-                        break;
-                    }
-                }
-            }
-
-            if (areGreater) {
-                areGreater = false;
-                for (int i = startIndex; i < pivotIndex; i++) {
-                    if (array[i] > array[pivotIndex]) {
-                        areGreater = true;
-
-                        int temp = array[i];
-                        array[i] = array[pivotIndex];
-                        array[pivotIndex] = temp;
-
-                        pivotIndex = i;
-
-                        break;
-                    }
-                }
-            }
-        }
-
-        quickSort(array, startIndex, pivotIndex - 1);
-        quickSort(array, pivotIndex + 1, endIndex);
 
         return array;
+    }
+
+    private void swap(int[] array, int startIndex, int pivotIndex) {
+        int tmp = array[startIndex];
+        array[startIndex] = array[pivotIndex];
+        array[pivotIndex] = tmp;
+    }
+
+    private int getPivotIndex(int[] array, int startIndex, int endIndex) {
+        int pivotIndex = startIndex;
+        int i;
+        for(i = startIndex + 1; i <= endIndex; i++) {
+            if(array[i] < array[startIndex]) {
+                swap(array, ++pivotIndex, i);
+            }
+        }
+
+        swap(array, startIndex, pivotIndex);
+        return pivotIndex;
     }
 
     public int[] oddEvenSort(int[] arr, int n)
