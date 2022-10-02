@@ -280,4 +280,32 @@ public class Root {
         return arr;
     }
 
+    public static int[] shakerSort(int[] arr, int n)
+    {
+        int begin = 0;
+        int end = n - 1;
+        while (begin < end) {
+            for (int j = begin; j < end; j++) {
+                if (arr[j + 1] < arr[j]) {
+                    int t;
+                    t = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = t;
+                }
+            }
+
+            end--;
+            for (int j = end; j > begin; j--) {
+                if (arr[j] < arr[j-1]) {
+                    int t;
+                    t = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = t;
+                }
+            }
+            begin++;
+        }
+        return arr;
+    }
+
 }
