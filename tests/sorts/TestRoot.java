@@ -47,4 +47,9 @@ public class TestRoot {
     public void isTimSort(){
         Assert.assertEquals(sorts.timSort(sorts.array, sorts.array.length), sortedData);
     }
+
+    @Test
+    public void isShakerSortCorrect() {
+        Assert.assertEquals(sorts.shakerSort(sorts.array, sorts.array.length), sortedData);
+    }
 }
