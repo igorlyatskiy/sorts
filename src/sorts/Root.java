@@ -117,7 +117,7 @@ public class Root {
         return array;
     }
 
-    private void swap(int[] array, int startIndex, int pivotIndex) {
+    private static void swap(int[] array, int startIndex, int pivotIndex) {
         int tmp = array[startIndex];
         array[startIndex] = array[pivotIndex];
         array[pivotIndex] = tmp;
@@ -308,4 +308,23 @@ public class Root {
         return arr;
     }
 
+    public static int[] ShellSort(int[] array) {
+        int h = 1;
+        while (h*3 < array.length)
+            h = h * 3 + 1;
+
+        while(h >= 1) {
+            int length = array.length;
+            for (int i = h; i < length; i++) {
+                for (int j = i; j >= h; j = j - h) {
+                    if (array[j] < array[j - h])
+                        swap(array, j, j - h);
+                    else
+                        break;
+                }
+            }
+            h = h/3;
+        }
+        return array;
+    }
 }

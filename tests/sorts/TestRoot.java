@@ -52,4 +52,8 @@ public class TestRoot {
     public void isShakerSortCorrect() {
         Assert.assertEquals(sorts.shakerSort(sorts.array, sorts.array.length), sortedData);
     }
+    @Test
+    public void ShellSort() {
+        Assert.assertEquals(sorts.ShellSort(sorts.array), sortedData);
+    }
 }
