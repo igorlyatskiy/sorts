@@ -67,4 +67,9 @@ public class TestRoot {
     public void isBucketSortCorrect() {
         Assert.assertEquals(sorts.bucketSort(sorts.array), sortedData);
     }
+
+    @Test
+    public void IsSelectionMethodSortCorrect() {
+        Assert.assertEquals(sorts.SelectionMethodSort(sorts.array), sortedData);
+    }
 }
