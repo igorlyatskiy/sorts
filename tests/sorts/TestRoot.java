@@ -54,6 +54,10 @@ public class TestRoot {
     }
 
     @Test
+
+    public void isTreeSort(){
+        Assert.assertEquals(sorts.treeSort(), sortedData);
+
     public void isShakerSortCorrect() {
         Assert.assertEquals(sorts.shakerSort(sorts.array, sorts.array.length), sortedData);
     }
@@ -66,6 +70,7 @@ public class TestRoot {
     @Test
     public void isBucketSortCorrect() {
         Assert.assertEquals(sorts.bucketSort(sorts.array), sortedData);
+
     }
 
     @Test

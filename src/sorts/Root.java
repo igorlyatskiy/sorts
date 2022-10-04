@@ -1,6 +1,8 @@
 package sorts;
 
 
+import sorts.bst.Tree;
+
 import java.util.Random;
 import java.util.*;
 
@@ -330,6 +332,18 @@ public class Root {
         return arr;
     }
 
+
+    public  int[] treeSort() {
+        var tree = new Tree();
+        for(int n: array)
+        {
+            tree.add(n);
+        }
+
+        return tree.inorder().stream().mapToInt(i -> Integer.parseInt(i.toString())).toArray();
+    }
+
+
     public static int[] shakerSort(int[] arr, int n)
     {
         int begin = 0;
@@ -415,4 +429,5 @@ public class Root {
                 sorted_array[position++] = b;
         return sorted_array;
     }
+
 }
