@@ -2,6 +2,7 @@ package sorts;
 
 
 import java.util.Random;
+import java.util.*;
 
 public class Root {
     public final int[] randomArray = new int[10000];
@@ -170,4 +171,52 @@ public class Root {
 
         return arr;
     }
+
+    public int[] radixSort(int[] arr) {
+        int max = getMaximum(arr);
+        int numberOfDigits = getNumberOfDigits(max);
+
+        List<Integer>[] buckets = new List[10];
+        for (int i = 0; i < buckets.length; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+
+        int divisor = 1;
+        // i == digit index
+        for (int i = 0; i < numberOfDigits; i++) {
+            if (i != 0) divisor *= 10;
+            // раскидываем по корзинам с учетом digit
+            for (int elem : arr) {
+                int digit = elem / divisor % 10;
+                buckets[digit].add(elem);
+            }
+
+            //обновляем исходный массив
+            int arrIndex = 0;
+            for (List<Integer> bucket : buckets) {
+                for (int elem : bucket) {
+                    arr[arrIndex] = elem;
+                    arrIndex++;
+                }
+                bucket.clear();
+            }
+        }
+
+        return arr;
+    }
+
+    private static int getMaximum(int[] arr) {
+        int max = arr[0];
+        for (int elem : arr) {
+            if (elem > max) {
+                max = elem;
+            }
+        }
+        return max;
+    }
+
+    private int getNumberOfDigits(int number) {
+        return (int) (Math.log10(number) + 1);
+    }
+
 }
