@@ -70,6 +70,6 @@ public class TestRoot {
 
     @Test
     public void isPatienceSortCorrect(){
-        Assert.asserEquals(sorts.patienceSort(sorts.array), sortedData);
+        Assert.assertEquals(sorts.patienceSort(sorts.array), sortedData);
     }
 }
