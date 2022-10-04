@@ -205,6 +205,20 @@ public class Root {
         return arr;
     }
 
+    private static int getMaximum(int[] arr) {
+        int max = arr[0];
+        for (int elem : arr) {
+            if (elem > max) {
+                max = elem;
+            }
+        }
+        return max;
+    }
+
+    private int getNumberOfDigits(int number) {
+        return (int) (Math.log10(number) + 1);
+    }
+
     //TimSort
     static int MIN_MERGE = 32;
 
@@ -312,20 +326,6 @@ public class Root {
         }
 
         return arr;
-    }
-
-    private static int getMaximum(int[] arr) {
-        int max = arr[0];
-        for (int elem : arr) {
-            if (elem > max) {
-                max = elem;
-            }
-        }
-        return max;
-    }
-
-    private int getNumberOfDigits(int number) {
-        return (int) (Math.log10(number) + 1);
     }
 
     public static int[] shakerSort(int[] arr, int n)
