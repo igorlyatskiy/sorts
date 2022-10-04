@@ -377,4 +377,25 @@ public class Root {
         }
         return array;
     }
+
+    public static int[] bucketsort(int[] array)
+    {
+        int maximum_value = 0;
+        for (int d = 0; d < array.length; d++)
+            if (array[d] > maximum_value)
+                maximum_value = array[d];
+
+        int[] newbucket = new int[maximum_value + 1];
+
+        int[] sorted_array = new int[array.length];
+
+        for (int a= 0; a <array.length; a++)
+            newbucket[array[a]]++;
+
+        int position = 0;
+        for (int b = 0; b < newbucket.length; b++)
+            for (int c = 0; c < newbucket[b]; c++)
+                sorted_array[position++] = b;
+        return sorted_array;
+    }
 }
