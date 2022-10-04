@@ -2,6 +2,7 @@ package sorts;
 
 
 import java.util.Random;
+import java.util.*;
 
 public class Root {
     public final int[] randomArray = new int[50000];
@@ -171,13 +172,60 @@ public class Root {
         return arr;
     }
 
+    public int[] radixSort(int[] arr) {
+        int max = getMaximum(arr);
+        int numberOfDigits = getNumberOfDigits(max);
+
+        List<Integer>[] buckets = new List[10];
+        for (int i = 0; i < buckets.length; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+
+        int divisor = 1;
+        // i == digit index
+        for (int i = 0; i < numberOfDigits; i++) {
+            if (i != 0) divisor *= 10;
+            // раскидываем по корзинам с учетом digit
+            for (int elem : arr) {
+                int digit = elem / divisor % 10;
+                buckets[digit].add(elem);
+            }
+
+            //обновляем исходный массив
+            int arrIndex = 0;
+            for (List<Integer> bucket : buckets) {
+                for (int elem : bucket) {
+                    arr[arrIndex] = elem;
+                    arrIndex++;
+                }
+                bucket.clear();
+            }
+        }
+
+        return arr;
+    }
+
+    private static int getMaximum(int[] arr) {
+        int max = arr[0];
+        for (int elem : arr) {
+            if (elem > max) {
+                max = elem;
+            }
+        }
+        return max;
+    }
+
+    private int getNumberOfDigits(int number) {
+        return (int) (Math.log10(number) + 1);
+    }
+
     //TimSort
     static int MIN_MERGE = 32;
- 
+
     public static int minRunLength(int n)
     {
         assert n >= 0;
-       
+
         int r = 0;
         while (n >= MIN_MERGE)
         {
@@ -186,9 +234,9 @@ public class Root {
         }
         return n + r;
     }
- 
+
     public static void timSortInsertionSort(int[] arr, int left,
-                                     int right)
+                                            int right)
     {
         for (int i = left + 1; i <= right; i++)
         {
@@ -202,9 +250,9 @@ public class Root {
             arr[j + 1] = temp;
         }
     }
- 
+
     public static void timSortMerge(int[] arr, int l,
-                                 int m, int r)
+                                    int m, int r)
     {
         int len1 = m - l + 1, len2 = r - m;
         int[] left = new int[len1];
@@ -217,11 +265,11 @@ public class Root {
         {
             right[x] = arr[m + 1 + x];
         }
- 
+
         int i = 0;
         int j = 0;
         int k = l;
- 
+
         while (i < len1 && j < len2)
         {
             if (left[i] <= right[j])
@@ -235,14 +283,14 @@ public class Root {
             }
             k++;
         }
- 
+
         while (i < len1)
         {
             arr[k] = left[i];
             k++;
             i++;
         }
- 
+
         while (j < len2)
         {
             arr[k] = right[j];
@@ -250,29 +298,29 @@ public class Root {
             j++;
         }
     }
- 
+
     public static int[] timSort(int[] arr, int n)
     {
         int minRun = minRunLength(MIN_MERGE);
-       
+
         for (int i = 0; i < n; i += minRun)
         {
             timSortInsertionSort(arr, i,
-                          Math.min((i + MIN_MERGE - 1), (n - 1)));
+                    Math.min((i + MIN_MERGE - 1), (n - 1)));
         }
- 
+
         for (int size = minRun; size < n; size = 2 * size)
         {
- 
+
             for (int left = 0; left < n;
-                                 left += 2 * size)
+                 left += 2 * size)
             {
- 
+
                 int mid = left + size - 1;
                 int right = Math.min((left + 2 * size - 1),
-                                     (n - 1));
- 
-                  if(mid < right)
+                        (n - 1));
+
+                if(mid < right)
                     timSortMerge(arr, left, mid, right);
             }
         }
