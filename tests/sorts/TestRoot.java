@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class TestRoot {
     private final Root sorts = new Root();
-    private int[] sortedData;
+    private final int[] sortedData;
 
     TestRoot() {
         sortedData = Arrays.copyOf(sorts.randomArray, sorts.randomArray.length);
@@ -49,7 +49,7 @@ public class TestRoot {
     }
 
     @Test
-    public void isTimSort() {
+    public void isTimSortCorrect() {
         Assert.assertEquals(sorts.timSort(sorts.array, sorts.array.length), sortedData);
     }
 
@@ -59,8 +59,13 @@ public class TestRoot {
     }
 
     @Test
-    public void ShellSort() {
-        Assert.assertEquals(sorts.ShellSort(sorts.array), sortedData);
+    public void isShellSortCorrect() {
+        Assert.assertEquals(sorts.shellSort(sorts.array), sortedData);
+    }
+
+    @Test
+    public void isBucketSortCorrect() {
+        Assert.assertEquals(sorts.bucketSort(sorts.array), sortedData);
     }
 
     @Test

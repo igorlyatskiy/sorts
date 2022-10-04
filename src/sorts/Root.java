@@ -5,14 +5,16 @@ import java.util.Random;
 import java.util.*;
 
 public class Root {
-    public final int[] randomArray = new int[50000];
-    public int[] array = new int[50000];
+    public static final int ARRAY_SIZE = 50000;
+    public static final int MAX_RANDOM_INT = 100000;
+    public final int[] randomArray = new int[ARRAY_SIZE];
+    public static int[] array = new int[ARRAY_SIZE];
 
     Root() {
         var random = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = random.nextInt(100000) + 1;
+            randomArray[i] = random.nextInt(MAX_RANDOM_INT) + 1;
         }
     }
 
@@ -356,7 +358,7 @@ public class Root {
         return arr;
     }
 
-    public static int[] ShellSort(int[] array) {
+    public static int[] shellSort(int[] array) {
         int h = 1;
         while (h*3 < array.length)
             h = h * 3 + 1;
@@ -376,6 +378,7 @@ public class Root {
         return array;
     }
 
+
     public static int[] SelectionMethodSort(int[] array) {
             for (int i = 0; i < array.length; i++) {   // i - номер текущего шага
                 int pos = i;
@@ -391,5 +394,25 @@ public class Root {
                 array[i] = min;    // меняем местами наименьший с array[i]
             }
         return array;
+
+    public static int[] bucketSort(int[] array)
+    {
+        int maximum_value = 0;
+        for (int d = 0; d < array.length; d++)
+            if (array[d] > maximum_value)
+                maximum_value = array[d];
+
+        int[] newbucket = new int[maximum_value + 1];
+
+        int[] sorted_array = new int[array.length];
+
+        for (int a= 0; a <array.length; a++)
+            newbucket[array[a]]++;
+
+        int position = 0;
+        for (int b = 0; b < newbucket.length; b++)
+            for (int c = 0; c < newbucket[b]; c++)
+                sorted_array[position++] = b;
+        return sorted_array;
     }
 }
