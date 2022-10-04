@@ -80,4 +80,9 @@ public class TestRoot {
     public void isSelectionMethodSortCorrect() {
         Assert.assertEquals(sorts.SelectionMethodSort(sorts.array), sortedData);
     }
+
+    @Test
+    public void isHeapSortCorrect(){
+        Assert.assertEquals(Root.heapSort(sorts.randomArray), sortedData);
+    }
 }
