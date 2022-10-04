@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class TestRoot {
     private final Root sorts = new Root();
-    private int[] sortedData;
+    private final int[] sortedData;
 
     TestRoot() {
         sortedData = Arrays.copyOf(sorts.randomArray, sorts.randomArray.length);
@@ -44,12 +44,32 @@ public class TestRoot {
     public void isOddEvenSortCorrect() { Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);}
 
     @Test
-    public void isTimSort(){
+    public void isRadixSortCorrect() {
+        Assert.assertEquals(sorts.radixSort(sorts.array), sortedData);
+    }
+
+    @Test
+    public void isTimSortCorrect() {
         Assert.assertEquals(sorts.timSort(sorts.array, sorts.array.length), sortedData);
     }
 
     @Test
+
     public void isTreeSort(){
         Assert.assertEquals(sorts.treeSort(), sortedData);
+
+    public void isShakerSortCorrect() {
+        Assert.assertEquals(sorts.shakerSort(sorts.array, sorts.array.length), sortedData);
+    }
+
+    @Test
+    public void isShellSortCorrect() {
+        Assert.assertEquals(sorts.shellSort(sorts.array), sortedData);
+    }
+
+    @Test
+    public void isBucketSortCorrect() {
+        Assert.assertEquals(sorts.bucketSort(sorts.array), sortedData);
+
     }
 }

@@ -4,16 +4,19 @@ package sorts;
 import sorts.bst.Tree;
 
 import java.util.Random;
+import java.util.*;
 
 public class Root {
-    public final int[] randomArray = new int[50000];
-    public int[] array = new int[50000];
+    public static final int ARRAY_SIZE = 50000;
+    public static final int MAX_RANDOM_INT = 100000;
+    public final int[] randomArray = new int[ARRAY_SIZE];
+    public static int[] array = new int[ARRAY_SIZE];
 
     Root() {
         var random = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = random.nextInt(100000) + 1;
+            randomArray[i] = random.nextInt(MAX_RANDOM_INT) + 1;
         }
     }
 
@@ -119,7 +122,7 @@ public class Root {
         return array;
     }
 
-    private void swap(int[] array, int startIndex, int pivotIndex) {
+    private static void swap(int[] array, int startIndex, int pivotIndex) {
         int tmp = array[startIndex];
         array[startIndex] = array[pivotIndex];
         array[pivotIndex] = tmp;
@@ -173,13 +176,60 @@ public class Root {
         return arr;
     }
 
+    public int[] radixSort(int[] arr) {
+        int max = getMaximum(arr);
+        int numberOfDigits = getNumberOfDigits(max);
+
+        List<Integer>[] buckets = new List[10];
+        for (int i = 0; i < buckets.length; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+
+        int divisor = 1;
+        // i == digit index
+        for (int i = 0; i < numberOfDigits; i++) {
+            if (i != 0) divisor *= 10;
+            // раскидываем по корзинам с учетом digit
+            for (int elem : arr) {
+                int digit = elem / divisor % 10;
+                buckets[digit].add(elem);
+            }
+
+            //обновляем исходный массив
+            int arrIndex = 0;
+            for (List<Integer> bucket : buckets) {
+                for (int elem : bucket) {
+                    arr[arrIndex] = elem;
+                    arrIndex++;
+                }
+                bucket.clear();
+            }
+        }
+
+        return arr;
+    }
+
+    private static int getMaximum(int[] arr) {
+        int max = arr[0];
+        for (int elem : arr) {
+            if (elem > max) {
+                max = elem;
+            }
+        }
+        return max;
+    }
+
+    private int getNumberOfDigits(int number) {
+        return (int) (Math.log10(number) + 1);
+    }
+
     //TimSort
     static int MIN_MERGE = 32;
- 
+
     public static int minRunLength(int n)
     {
         assert n >= 0;
-       
+
         int r = 0;
         while (n >= MIN_MERGE)
         {
@@ -188,9 +238,9 @@ public class Root {
         }
         return n + r;
     }
- 
+
     public static void timSortInsertionSort(int[] arr, int left,
-                                     int right)
+                                            int right)
     {
         for (int i = left + 1; i <= right; i++)
         {
@@ -204,9 +254,9 @@ public class Root {
             arr[j + 1] = temp;
         }
     }
- 
+
     public static void timSortMerge(int[] arr, int l,
-                                 int m, int r)
+                                    int m, int r)
     {
         int len1 = m - l + 1, len2 = r - m;
         int[] left = new int[len1];
@@ -219,11 +269,11 @@ public class Root {
         {
             right[x] = arr[m + 1 + x];
         }
- 
+
         int i = 0;
         int j = 0;
         int k = l;
- 
+
         while (i < len1 && j < len2)
         {
             if (left[i] <= right[j])
@@ -237,14 +287,14 @@ public class Root {
             }
             k++;
         }
- 
+
         while (i < len1)
         {
             arr[k] = left[i];
             k++;
             i++;
         }
- 
+
         while (j < len2)
         {
             arr[k] = right[j];
@@ -252,35 +302,36 @@ public class Root {
             j++;
         }
     }
- 
+
     public static int[] timSort(int[] arr, int n)
     {
         int minRun = minRunLength(MIN_MERGE);
-       
+
         for (int i = 0; i < n; i += minRun)
         {
             timSortInsertionSort(arr, i,
-                          Math.min((i + MIN_MERGE - 1), (n - 1)));
+                    Math.min((i + MIN_MERGE - 1), (n - 1)));
         }
- 
+
         for (int size = minRun; size < n; size = 2 * size)
         {
- 
+
             for (int left = 0; left < n;
-                                 left += 2 * size)
+                 left += 2 * size)
             {
- 
+
                 int mid = left + size - 1;
                 int right = Math.min((left + 2 * size - 1),
-                                     (n - 1));
- 
-                  if(mid < right)
+                        (n - 1));
+
+                if(mid < right)
                     timSortMerge(arr, left, mid, right);
             }
         }
 
         return arr;
     }
+
 
     public  int[] treeSort() {
         var tree = new Tree();
@@ -290,6 +341,76 @@ public class Root {
         }
 
         return tree.inorder().stream().mapToInt(i -> Integer.parseInt(i.toString())).toArray();
+    }
+
+
+    public static int[] shakerSort(int[] arr, int n)
+    {
+        int begin = 0;
+        int end = n - 1;
+        while (begin < end) {
+            for (int j = begin; j < end; j++) {
+                if (arr[j + 1] < arr[j]) {
+                    int t;
+                    t = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = t;
+                }
+            }
+
+            end--;
+            for (int j = end; j > begin; j--) {
+                if (arr[j] < arr[j-1]) {
+                    int t;
+                    t = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = t;
+                }
+            }
+            begin++;
+        }
+        return arr;
+    }
+
+    public static int[] shellSort(int[] array) {
+        int h = 1;
+        while (h*3 < array.length)
+            h = h * 3 + 1;
+
+        while(h >= 1) {
+            int length = array.length;
+            for (int i = h; i < length; i++) {
+                for (int j = i; j >= h; j = j - h) {
+                    if (array[j] < array[j - h])
+                        swap(array, j, j - h);
+                    else
+                        break;
+                }
+            }
+            h = h/3;
+        }
+        return array;
+    }
+
+    public static int[] bucketSort(int[] array)
+    {
+        int maximum_value = 0;
+        for (int d = 0; d < array.length; d++)
+            if (array[d] > maximum_value)
+                maximum_value = array[d];
+
+        int[] newbucket = new int[maximum_value + 1];
+
+        int[] sorted_array = new int[array.length];
+
+        for (int a= 0; a <array.length; a++)
+            newbucket[array[a]]++;
+
+        int position = 0;
+        for (int b = 0; b < newbucket.length; b++)
+            for (int c = 0; c < newbucket[b]; c++)
+                sorted_array[position++] = b;
+        return sorted_array;
     }
 
 }
