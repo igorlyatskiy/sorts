@@ -358,7 +358,7 @@ public class Root {
         return arr;
     }
 
-    public static int[] ShellSort(int[] array) {
+    public static int[] shellSort(int[] array) {
         int h = 1;
         while (h*3 < array.length)
             h = h * 3 + 1;
@@ -378,7 +378,7 @@ public class Root {
         return array;
     }
 
-    public static int[] bucketsort(int[] array)
+    public static int[] bucketSort(int[] array)
     {
         int maximum_value = 0;
         for (int d = 0; d < array.length; d++)

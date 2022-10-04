@@ -60,11 +60,11 @@ public class TestRoot {
 
     @Test
     public void isShellSortCorrect() {
-        Assert.assertEquals(sorts.ShellSort(sorts.array), sortedData);
+        Assert.assertEquals(sorts.shellSort(sorts.array), sortedData);
     }
 
     @Test
-    public void isBucketSort() {
-        Assert.assertEquals(sorts.bucketsort(sorts.array), sortedData);
+    public void isBucketSortCorrect() {
+        Assert.assertEquals(sorts.bucketSort(sorts.array), sortedData);
     }
 }
