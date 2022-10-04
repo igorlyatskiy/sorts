@@ -62,4 +62,9 @@ public class TestRoot {
     public void ShellSort() {
         Assert.assertEquals(sorts.ShellSort(sorts.array), sortedData);
     }
+
+    @Test
+    public void IsSelectionMethodSortCorrect() {
+        Assert.assertEquals(sorts.SelectionMethodSort(sorts.array), sortedData);
+    }
 }
