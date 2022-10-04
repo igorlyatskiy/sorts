@@ -5,14 +5,16 @@ import java.util.Random;
 import java.util.*;
 
 public class Root {
-    public final int[] randomArray = new int[50000];
-    public int[] array = new int[50000];
+    public static final int ARRAY_SIZE = 50000;
+    public static final int MAX_RANDOM_INT = 100000;
+    public final int[] randomArray = new int[ARRAY_SIZE];
+    public static int[] array = new int[ARRAY_SIZE];
 
     Root() {
         var random = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = random.nextInt(100000) + 1;
+            randomArray[i] = random.nextInt(MAX_RANDOM_INT) + 1;
         }
     }
 
