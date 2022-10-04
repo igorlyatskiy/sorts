@@ -17,7 +17,7 @@ public class TestRoot {
 
     @BeforeMethod()
     public void restoreArray() {
-        sorts.array = Arrays.copyOf(sorts.randomArray, sorts.randomArray.length);
+        Root.array = Arrays.copyOf(sorts.randomArray, sorts.randomArray.length);
     }
 
     @Test
@@ -41,7 +41,9 @@ public class TestRoot {
     }
 
     @Test
-    public void isOddEvenSortCorrect() { Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);}
+    public void isOddEvenSortCorrect() {
+        Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);
+    }
 
     @Test
     public void isRadixSortCorrect() {
@@ -54,10 +56,11 @@ public class TestRoot {
     }
 
     @Test
-
-    public void isTreeSort(){
+    public void isTreeSortCorrect() {
         Assert.assertEquals(sorts.treeSort(), sortedData);
+    }
 
+    @Test
     public void isShakerSortCorrect() {
         Assert.assertEquals(sorts.shakerSort(sorts.array, sorts.array.length), sortedData);
     }
@@ -74,7 +77,7 @@ public class TestRoot {
     }
 
     @Test
-    public void IsSelectionMethodSortCorrect() {
+    public void isSelectionMethodSortCorrect() {
         Assert.assertEquals(sorts.SelectionMethodSort(sorts.array), sortedData);
     }
 }
