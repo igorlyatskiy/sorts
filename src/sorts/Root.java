@@ -377,7 +377,7 @@ public class Root {
     }
 
     public static int[] SelectionMethodSort(int[] array) {
-            for (int i = 0; i < array.length; i++) {    // i - номер текущего шага
+            for (int i = 0; i < array.length; i++) {   // i - номер текущего шага
                 int pos = i;
                 int min = array[i];
                 // цикл выбора наименьшего элемента
