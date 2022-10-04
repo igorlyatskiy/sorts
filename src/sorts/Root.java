@@ -5,14 +5,14 @@ import java.util.Random;
 import java.util.*;
 
 public class Root {
-    public final int[] randomArray = new int[10000];
-    public int[] array = new int[10000];
+    public final int[] randomArray = new int[50000];
+    public int[] array = new int[50000];
 
     Root() {
         var random = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = random.nextInt(10000) + 1;
+            randomArray[i] = random.nextInt(100000) + 1;
         }
     }
 
@@ -118,7 +118,7 @@ public class Root {
         return array;
     }
 
-    private void swap(int[] array, int startIndex, int pivotIndex) {
+    private static void swap(int[] array, int startIndex, int pivotIndex) {
         int tmp = array[startIndex];
         array[startIndex] = array[pivotIndex];
         array[pivotIndex] = tmp;
@@ -205,6 +205,115 @@ public class Root {
         return arr;
     }
 
+    //TimSort
+    static int MIN_MERGE = 32;
+
+    public static int minRunLength(int n)
+    {
+        assert n >= 0;
+
+        int r = 0;
+        while (n >= MIN_MERGE)
+        {
+            r |= (n & 1);
+            n >>= 1;
+        }
+        return n + r;
+    }
+
+    public static void timSortInsertionSort(int[] arr, int left,
+                                            int right)
+    {
+        for (int i = left + 1; i <= right; i++)
+        {
+            int temp = arr[i];
+            int j = i - 1;
+            while (j >= left && arr[j] > temp)
+            {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = temp;
+        }
+    }
+
+    public static void timSortMerge(int[] arr, int l,
+                                    int m, int r)
+    {
+        int len1 = m - l + 1, len2 = r - m;
+        int[] left = new int[len1];
+        int[] right = new int[len2];
+        for (int x = 0; x < len1; x++)
+        {
+            left[x] = arr[l + x];
+        }
+        for (int x = 0; x < len2; x++)
+        {
+            right[x] = arr[m + 1 + x];
+        }
+
+        int i = 0;
+        int j = 0;
+        int k = l;
+
+        while (i < len1 && j < len2)
+        {
+            if (left[i] <= right[j])
+            {
+                arr[k] = left[i];
+                i++;
+            }
+            else {
+                arr[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < len1)
+        {
+            arr[k] = left[i];
+            k++;
+            i++;
+        }
+
+        while (j < len2)
+        {
+            arr[k] = right[j];
+            k++;
+            j++;
+        }
+    }
+
+    public static int[] timSort(int[] arr, int n)
+    {
+        int minRun = minRunLength(MIN_MERGE);
+
+        for (int i = 0; i < n; i += minRun)
+        {
+            timSortInsertionSort(arr, i,
+                    Math.min((i + MIN_MERGE - 1), (n - 1)));
+        }
+
+        for (int size = minRun; size < n; size = 2 * size)
+        {
+
+            for (int left = 0; left < n;
+                 left += 2 * size)
+            {
+
+                int mid = left + size - 1;
+                int right = Math.min((left + 2 * size - 1),
+                        (n - 1));
+
+                if(mid < right)
+                    timSortMerge(arr, left, mid, right);
+            }
+        }
+
+        return arr;
+    }
+
     private static int getMaximum(int[] arr) {
         int max = arr[0];
         for (int elem : arr) {
@@ -219,4 +328,51 @@ public class Root {
         return (int) (Math.log10(number) + 1);
     }
 
+    public static int[] shakerSort(int[] arr, int n)
+    {
+        int begin = 0;
+        int end = n - 1;
+        while (begin < end) {
+            for (int j = begin; j < end; j++) {
+                if (arr[j + 1] < arr[j]) {
+                    int t;
+                    t = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = t;
+                }
+            }
+
+            end--;
+            for (int j = end; j > begin; j--) {
+                if (arr[j] < arr[j-1]) {
+                    int t;
+                    t = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = t;
+                }
+            }
+            begin++;
+        }
+        return arr;
+    }
+
+    public static int[] ShellSort(int[] array) {
+        int h = 1;
+        while (h*3 < array.length)
+            h = h * 3 + 1;
+
+        while(h >= 1) {
+            int length = array.length;
+            for (int i = h; i < length; i++) {
+                for (int j = i; j >= h; j = j - h) {
+                    if (array[j] < array[j - h])
+                        swap(array, j, j - h);
+                    else
+                        break;
+                }
+            }
+            h = h/3;
+        }
+        return array;
+    }
 }
