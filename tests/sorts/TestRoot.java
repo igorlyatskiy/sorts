@@ -67,4 +67,9 @@ public class TestRoot {
     public void isBucketSort() {
         Assert.assertEquals(sorts.bucketsort(sorts.array), sortedData);
     }
+
+    @Test
+    public void isPatienceSortCorrect(){
+        Assert.asserEquals(sorts.patienceSort(sorts.array), sortedData);
+    }
 }
