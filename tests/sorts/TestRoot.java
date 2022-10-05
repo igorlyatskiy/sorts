@@ -83,11 +83,11 @@ public class TestRoot {
 
     @Test
     public void isHeapSortCorrect() {
-        Assert.assertEquals(Root.heapSort(sorts.array), sortedData);
+        Assert.assertEquals(sorts.heapSort(sorts.array), sortedData);
     }
 
     @Test
-    public void isShuttleSortCorrect(){
-        Assert.assertEquals(Root.shuttleSort(sorts.array), sortedData);
+    public void isShuttleSortCorrect() {
+        Assert.assertEquals(sorts.shuttleSort(sorts.array), sortedData);
     }
 }
