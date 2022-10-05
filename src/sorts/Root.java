@@ -405,4 +405,46 @@ public class Root {
         return sorted_array;
     }
 
+    //Heap sort
+
+    public static int[] heapSort(int[] a) {
+        int heapSize = a.length;
+        buildHeap(a, heapSize);
+        while (heapSize > 1) {
+            int temp = a[0];
+            a[0] = a[heapSize-1];
+            a[heapSize-1] = temp;
+            heapSize--;
+            heapify(a, 0, heapSize);
+        }
+        return a;
+    }
+
+    //доп метод для heapSort, строит кучу (переупорядочивает поддеревья)
+    private static void buildHeap(int[] a, int heap) {
+
+        for (int i = a.length / 2; i >= 0; i--) {
+            heapify(a, i, heap);
+        }
+    }
+
+    //доп метод переупорядочивает поддерево кучи начиная с узла i так, чтобы выполнялось
+    //основное свойство кучи - a[parent] >= a[child].
+    private static void heapify(int[] a, int i, int heapSize) {
+        int l = 2 * i + 1; // индекс левого потомка текущего узла
+        int r = 2 * i + 2; // индекс правого потомка текущего узла
+        int largest = i;
+        if (l < heapSize && a[i] < a[l]) {
+            largest = l;
+        }
+        if (r < heapSize && a[largest] < a[r]) {
+            largest = r;
+        }
+        if (i != largest) {
+            int temp = a[i];
+            a[i] = a[largest];
+            a[largest] = temp;
+            heapify(a, largest, heapSize);
+        }
+    }
 }

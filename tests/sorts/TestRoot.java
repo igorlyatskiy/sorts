@@ -56,7 +56,7 @@ public class TestRoot {
     }
 
     @Test
-    public void isTreeSort() {
+    public void isTreeSortCorrect() {
         Assert.assertEquals(sorts.treeSort(), sortedData);
     }
 
@@ -77,7 +77,12 @@ public class TestRoot {
     }
 
     @Test
-    public void IsSelectionMethodSortCorrect() {
+    public void isSelectionMethodSortCorrect() {
         Assert.assertEquals(sorts.SelectionMethodSort(sorts.array), sortedData);
+    }
+
+    @Test
+    public void isHeapSortCorrect() {
+        Assert.assertEquals(Root.heapSort(sorts.array), sortedData);
     }
 }
