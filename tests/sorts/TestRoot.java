@@ -85,4 +85,9 @@ public class TestRoot {
     public void isHeapSortCorrect() {
         Assert.assertEquals(Root.heapSort(sorts.array), sortedData);
     }
+
+    @Test
+    public void isShuttleSortCorrect(){
+        Assert.assertEquals(Root.shuttleSort(sorts.array), sortedData);
+    }
 }
