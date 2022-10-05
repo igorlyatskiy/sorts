@@ -448,7 +448,7 @@ public class Root {
         }
     }
     //Shuttle Sort
-    public static int[] shuttleSort(int[] source) {
+    public int[] shuttleSort(int[] source) {
         for (int holePosition = 0; holePosition < source.length; holePosition++) {
             int takenValue = source[holePosition];
             int c;
