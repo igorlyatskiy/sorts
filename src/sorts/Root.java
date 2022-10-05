@@ -1,6 +1,8 @@
 package sorts;
 
 
+import sorts.bst.Tree;
+
 import java.util.Random;
 import java.util.*;
 
@@ -111,7 +113,7 @@ public class Root {
     }
 
     public int[] quickSort(int[] array, int startIndex, int endIndex) {
-        if(startIndex < endIndex) {
+        if (startIndex < endIndex) {
             int pivotIndex = getPivotIndex(array, startIndex, endIndex);
             quickSort(array, startIndex, pivotIndex - 1);
             quickSort(array, pivotIndex + 1, endIndex);
@@ -129,8 +131,8 @@ public class Root {
     private int getPivotIndex(int[] array, int startIndex, int endIndex) {
         int pivotIndex = startIndex;
         int i;
-        for(i = startIndex + 1; i <= endIndex; i++) {
-            if(array[i] < array[startIndex]) {
+        for (i = startIndex + 1; i <= endIndex; i++) {
+            if (array[i] < array[startIndex]) {
                 swap(array, ++pivotIndex, i);
             }
         }
@@ -139,33 +141,27 @@ public class Root {
         return pivotIndex;
     }
 
-    public int[] oddEvenSort(int[] arr, int n)
-    {
+    public int[] oddEvenSort(int[] arr, int n) {
         boolean isSorted = false;
 
-        while (!isSorted)
-        {
+        while (!isSorted) {
             isSorted = true;
-            int temp =0;
+            int temp = 0;
 
-            for (int i=1; i<=n-2; i=i+2)
-            {
-                if (arr[i] > arr[i+1])
-                {
+            for (int i = 1; i <= n - 2; i = i + 2) {
+                if (arr[i] > arr[i + 1]) {
                     temp = arr[i];
-                    arr[i] = arr[i+1];
-                    arr[i+1] = temp;
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
                     isSorted = false;
                 }
             }
 
-            for (int i=0; i<=n-2; i=i+2)
-            {
-                if (arr[i] > arr[i+1])
-                {
+            for (int i = 0; i <= n - 2; i = i + 2) {
+                if (arr[i] > arr[i + 1]) {
                     temp = arr[i];
-                    arr[i] = arr[i+1];
-                    arr[i+1] = temp;
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
                     isSorted = false;
                 }
             }
@@ -224,13 +220,11 @@ public class Root {
     //TimSort
     static int MIN_MERGE = 32;
 
-    public static int minRunLength(int n)
-    {
+    public static int minRunLength(int n) {
         assert n >= 0;
 
         int r = 0;
-        while (n >= MIN_MERGE)
-        {
+        while (n >= MIN_MERGE) {
             r |= (n & 1);
             n >>= 1;
         }
@@ -238,14 +232,11 @@ public class Root {
     }
 
     public static void timSortInsertionSort(int[] arr, int left,
-                                            int right)
-    {
-        for (int i = left + 1; i <= right; i++)
-        {
+                                            int right) {
+        for (int i = left + 1; i <= right; i++) {
             int temp = arr[i];
             int j = i - 1;
-            while (j >= left && arr[j] > temp)
-            {
+            while (j >= left && arr[j] > temp) {
                 arr[j + 1] = arr[j];
                 j--;
             }
@@ -254,17 +245,14 @@ public class Root {
     }
 
     public static void timSortMerge(int[] arr, int l,
-                                    int m, int r)
-    {
+                                    int m, int r) {
         int len1 = m - l + 1, len2 = r - m;
         int[] left = new int[len1];
         int[] right = new int[len2];
-        for (int x = 0; x < len1; x++)
-        {
+        for (int x = 0; x < len1; x++) {
             left[x] = arr[l + x];
         }
-        for (int x = 0; x < len2; x++)
-        {
+        for (int x = 0; x < len2; x++) {
             right[x] = arr[m + 1 + x];
         }
 
@@ -272,57 +260,48 @@ public class Root {
         int j = 0;
         int k = l;
 
-        while (i < len1 && j < len2)
-        {
-            if (left[i] <= right[j])
-            {
+        while (i < len1 && j < len2) {
+            if (left[i] <= right[j]) {
                 arr[k] = left[i];
                 i++;
-            }
-            else {
+            } else {
                 arr[k] = right[j];
                 j++;
             }
             k++;
         }
 
-        while (i < len1)
-        {
+        while (i < len1) {
             arr[k] = left[i];
             k++;
             i++;
         }
 
-        while (j < len2)
-        {
+        while (j < len2) {
             arr[k] = right[j];
             k++;
             j++;
         }
     }
 
-    public static int[] timSort(int[] arr, int n)
-    {
+    public static int[] timSort(int[] arr, int n) {
         int minRun = minRunLength(MIN_MERGE);
 
-        for (int i = 0; i < n; i += minRun)
-        {
+        for (int i = 0; i < n; i += minRun) {
             timSortInsertionSort(arr, i,
                     Math.min((i + MIN_MERGE - 1), (n - 1)));
         }
 
-        for (int size = minRun; size < n; size = 2 * size)
-        {
+        for (int size = minRun; size < n; size = 2 * size) {
 
             for (int left = 0; left < n;
-                 left += 2 * size)
-            {
+                 left += 2 * size) {
 
                 int mid = left + size - 1;
                 int right = Math.min((left + 2 * size - 1),
                         (n - 1));
 
-                if(mid < right)
+                if (mid < right)
                     timSortMerge(arr, left, mid, right);
             }
         }
@@ -330,8 +309,18 @@ public class Root {
         return arr;
     }
 
-    public static int[] shakerSort(int[] arr, int n)
-    {
+
+    public int[] treeSort() {
+        var tree = new Tree();
+        for (int n : array) {
+            tree.add(n);
+        }
+
+        return tree.inorder().stream().mapToInt(i -> Integer.parseInt(i.toString())).toArray();
+    }
+
+
+    public static int[] shakerSort(int[] arr, int n) {
         int begin = 0;
         int end = n - 1;
         while (begin < end) {
@@ -346,10 +335,10 @@ public class Root {
 
             end--;
             for (int j = end; j > begin; j--) {
-                if (arr[j] < arr[j-1]) {
+                if (arr[j] < arr[j - 1]) {
                     int t;
-                    t = arr[j-1];
-                    arr[j-1] = arr[j];
+                    t = arr[j - 1];
+                    arr[j - 1] = arr[j];
                     arr[j] = t;
                 }
             }
@@ -358,12 +347,12 @@ public class Root {
         return arr;
     }
 
-    public static int[] ShellSort(int[] array) {
+    public static int[] shellSort(int[] array) {
         int h = 1;
-        while (h*3 < array.length)
+        while (h * 3 < array.length)
             h = h * 3 + 1;
 
-        while(h >= 1) {
+        while (h >= 1) {
             int length = array.length;
             for (int i = h; i < length; i++) {
                 for (int j = i; j >= h; j = j - h) {
@@ -373,24 +362,41 @@ public class Root {
                         break;
                 }
             }
-            h = h/3;
+            h = h / 3;
         }
         return array;
     }
 
-    public static int[] bucketsort(int[] array)
-    {
+
+    public static int[] SelectionMethodSort(int[] array) {
+        for (int i = 0; i < array.length; i++) {   // i - номер текущего шага
+            int pos = i;
+            int min = array[i];
+            // цикл выбора наименьшего элемента
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[j] < min) {
+                    pos = j;    // pos - индекс наименьшего элемента
+                    min = array[j];
+                }
+            }
+            array[pos] = array[i];
+            array[i] = min;    // меняем местами наименьший с array[i]
+        }
+        return array;
+    }
+
+    public static int[] bucketSort(int[] paramArray) {
         int maximum_value = 0;
-        for (int d = 0; d < array.length; d++)
-            if (array[d] > maximum_value)
-                maximum_value = array[d];
+        for (int d = 0; d < paramArray.length; d++)
+            if (paramArray[d] > maximum_value)
+                maximum_value = paramArray[d];
 
         int[] newbucket = new int[maximum_value + 1];
 
-        int[] sorted_array = new int[array.length];
+        int[] sorted_array = new int[paramArray.length];
 
-        for (int a= 0; a <array.length; a++)
-            newbucket[array[a]]++;
+        for (int a = 0; a < paramArray.length; a++)
+            newbucket[paramArray[a]]++;
 
         int position = 0;
         for (int b = 0; b < newbucket.length; b++)
@@ -398,6 +404,7 @@ public class Root {
                 sorted_array[position++] = b;
         return sorted_array;
     }
+
 
     public static int[] patienceSort(int[] theArray) {
         List<List<Integer>> new_list = new ArrayList<>();
@@ -442,3 +449,60 @@ public class Root {
         return ok_list;
     }
 }
+
+    //Heap sort
+
+    public static int[] heapSort(int[] a) {
+        int heapSize = a.length;
+        buildHeap(a, heapSize);
+        while (heapSize > 1) {
+            int temp = a[0];
+            a[0] = a[heapSize-1];
+            a[heapSize-1] = temp;
+            heapSize--;
+            heapify(a, 0, heapSize);
+        }
+        return a;
+    }
+
+    //доп метод для heapSort, строит кучу (переупорядочивает поддеревья)
+    private static void buildHeap(int[] a, int heap) {
+
+        for (int i = a.length / 2; i >= 0; i--) {
+            heapify(a, i, heap);
+        }
+    }
+
+    //доп метод переупорядочивает поддерево кучи начиная с узла i так, чтобы выполнялось
+    //основное свойство кучи - a[parent] >= a[child].
+    private static void heapify(int[] a, int i, int heapSize) {
+        int l = 2 * i + 1; // индекс левого потомка текущего узла
+        int r = 2 * i + 2; // индекс правого потомка текущего узла
+        int largest = i;
+        if (l < heapSize && a[i] < a[l]) {
+            largest = l;
+        }
+        if (r < heapSize && a[largest] < a[r]) {
+            largest = r;
+        }
+        if (i != largest) {
+            int temp = a[i];
+            a[i] = a[largest];
+            a[largest] = temp;
+            heapify(a, largest, heapSize);
+        }
+    }
+    //Shuttle Sort
+    public int[] shuttleSort(int[] source) {
+        for (int holePosition = 0; holePosition < source.length; holePosition++) {
+            int takenValue = source[holePosition];
+            int c;
+            for (c = holePosition - 1; c >= 0 && takenValue < source[c]; c--){
+                source[c + 1] = source[c];
+            }
+            source[c + 1] = takenValue;
+        }
+        return source;
+    }
+}
+

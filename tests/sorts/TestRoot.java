@@ -41,7 +41,9 @@ public class TestRoot {
     }
 
     @Test
-    public void isOddEvenSortCorrect() { Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);}
+    public void isOddEvenSortCorrect() {
+        Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);
+    }
 
     @Test
     public void isRadixSortCorrect() {
@@ -54,18 +56,39 @@ public class TestRoot {
     }
 
     @Test
+    public void isTreeSortCorrect() {
+        Assert.assertEquals(sorts.treeSort(), sortedData);
+    }
+
+    @Test
     public void isShakerSortCorrect() {
         Assert.assertEquals(sorts.shakerSort(sorts.array, sorts.array.length), sortedData);
     }
 
     @Test
     public void isShellSortCorrect() {
-        Assert.assertEquals(sorts.ShellSort(sorts.array), sortedData);
+        Assert.assertEquals(sorts.shellSort(sorts.array), sortedData);
     }
 
     @Test
-    public void isBucketSort() {
-        Assert.assertEquals(sorts.bucketsort(sorts.array), sortedData);
+    public void isBucketSortCorrect() {
+        Assert.assertEquals(sorts.bucketSort(sorts.array), sortedData);
+
+    }
+
+    @Test
+    public void isSelectionMethodSortCorrect() {
+        Assert.assertEquals(sorts.SelectionMethodSort(sorts.array), sortedData);
+    }
+
+    @Test
+    public void isHeapSortCorrect() {
+        Assert.assertEquals(sorts.heapSort(sorts.array), sortedData);
+    }
+
+    @Test
+    public void isShuttleSortCorrect() {
+        Assert.assertEquals(sorts.shuttleSort(sorts.array), sortedData);
     }
 
     @Test
