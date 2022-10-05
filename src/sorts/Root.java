@@ -448,7 +448,6 @@ public class Root {
         }
         return ok_list;
     }
-}
 
     //Heap sort
 
@@ -457,8 +456,8 @@ public class Root {
         buildHeap(a, heapSize);
         while (heapSize > 1) {
             int temp = a[0];
-            a[0] = a[heapSize-1];
-            a[heapSize-1] = temp;
+            a[0] = a[heapSize - 1];
+            a[heapSize - 1] = temp;
             heapSize--;
             heapify(a, 0, heapSize);
         }
@@ -492,12 +491,13 @@ public class Root {
             heapify(a, largest, heapSize);
         }
     }
+
     //Shuttle Sort
     public int[] shuttleSort(int[] source) {
         for (int holePosition = 0; holePosition < source.length; holePosition++) {
             int takenValue = source[holePosition];
             int c;
-            for (c = holePosition - 1; c >= 0 && takenValue < source[c]; c--){
+            for (c = holePosition - 1; c >= 0 && takenValue < source[c]; c--) {
                 source[c + 1] = source[c];
             }
             source[c + 1] = takenValue;
