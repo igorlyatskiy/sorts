@@ -447,4 +447,16 @@ public class Root {
             heapify(a, largest, heapSize);
         }
     }
+    //Shuttle Sort
+    public static int[] shuttleSort(int[] source) {
+        for (int holePosition = 0; holePosition < source.length; holePosition++) {
+            int takenValue = source[holePosition];
+            int c;
+            for (c = holePosition - 1; c >= 0 && takenValue < source[c]; c--){
+                source[c + 1] = source[c];
+            }
+            source[c + 1] = takenValue;
+        }
+        return source;
+    }
 }
