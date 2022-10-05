@@ -90,4 +90,9 @@ public class TestRoot {
     public void isShuttleSortCorrect() {
         Assert.assertEquals(sorts.shuttleSort(sorts.array), sortedData);
     }
+
+    @Test
+    public void isPatienceSortCorrect(){
+        Assert.assertEquals(sorts.patienceSort(sorts.array), sortedData);
+    }
 }

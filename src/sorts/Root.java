@@ -405,6 +405,51 @@ public class Root {
         return sorted_array;
     }
 
+
+    public static int[] patienceSort(int[] theArray) {
+        List<List<Integer>> new_list = new ArrayList<>();
+        for (int i = 0; i < theArray.length; i++) {
+            List<Integer> bucket_list = new ArrayList<>();
+            if (i == 0) {
+                bucket_list.add(theArray[i]);
+                new_list.add(bucket_list);
+            } else {
+                boolean is_ok = false;
+                for (List<?> o : new_list) {
+                    if (theArray[i] < (int) o.get(0)) {
+                        ((List) o).add(0, theArray[i]);
+                        is_ok = true;
+                        break;
+                    }
+                }
+                if (!is_ok) {
+                    bucket_list.add(theArray[i]);
+                    new_list.add(bucket_list);
+                }
+            }
+        }
+        int[] ok_list = new int[theArray.length];
+        int q = 0;
+        for (List<Integer> integers : new_list) {
+            for (Integer integer : integers) {
+                ok_list[q] = (int) integer;
+                q++;
+            }
+        }
+        int n = ok_list.length;
+        int tmp;
+        int j;
+        for (int i = 1; i < n; i++) {
+            tmp = ok_list[i];
+            for (j = i - 1; j >= 0 && ok_list[j] > tmp; j--) {
+                ok_list[j + 1] = ok_list[j];
+            }
+            ok_list[j + 1] = tmp;
+        }
+        return ok_list;
+    }
+}
+
     //Heap sort
 
     public static int[] heapSort(int[] a) {
@@ -460,3 +505,4 @@ public class Root {
         return source;
     }
 }
+
