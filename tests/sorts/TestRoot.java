@@ -41,7 +41,9 @@ public class TestRoot {
     }
 
     @Test
-    public void isOddEvenSortCorrect() { Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);}
+    public void isOddEvenSortCorrect() {
+        Assert.assertEquals(sorts.oddEvenSort(sorts.array, sorts.array.length), sortedData);
+    }
 
     @Test
     public void isRadixSortCorrect() {
@@ -54,10 +56,11 @@ public class TestRoot {
     }
 
     @Test
-
-    public void isTreeSort(){
+    public void isTreeSort() {
         Assert.assertEquals(sorts.treeSort(), sortedData);
+    }
 
+    @Test
     public void isShakerSortCorrect() {
         Assert.assertEquals(sorts.shakerSort(sorts.array, sorts.array.length), sortedData);
     }
